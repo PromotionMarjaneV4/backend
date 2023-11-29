@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/marjan
+    username: postgres
+    password:
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:db.changelog/changelog-master.xml
+    user: postgres
+    url: jdbc:postgresql://localhost:5432/marjan
+    password:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: Abderrahmanehaouate@gmail.com
+    password: ipsi hekl ecwr lqdv
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
