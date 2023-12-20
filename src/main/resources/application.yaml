@@ -2,13 +2,13 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/marjan
     username: postgres
-    password:
+    password: postgres
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:db.changelog/changelog-master.xml
     user: postgres
     url: jdbc:postgresql://localhost:5432/marjan
-    password:
+    password: postgres
     enabled: true
   jpa:
     hibernate:
