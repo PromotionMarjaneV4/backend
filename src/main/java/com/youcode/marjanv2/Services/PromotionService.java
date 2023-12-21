@@ -59,7 +59,6 @@ public class PromotionService {
             Category category = categoryRepository.findById(categoryDto.getId())
                     .orElseThrow(() -> new EntityNotFoundException("Category with ID " + categoryDto.getId() + " not found"));
 
-            // Set the promotion for the category
             category.setPromotion(promotion);
 
             // Add the managed category to the list

@@ -38,4 +38,8 @@ public class CategoryService {
         Category category = modelMapper.map(categoryDto, Category.class);
         categoryRepository.save(category);
     }
+
+    public void deleteCategoryById(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }

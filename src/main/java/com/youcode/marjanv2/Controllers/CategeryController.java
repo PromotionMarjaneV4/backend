@@ -35,6 +35,11 @@ public class CategeryController {
         return new ResponseEntity<>("Category created successfully", HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteCategoryById(@PathVariable Long id) {
+        categoryService.deleteCategoryById(id);
+    }
+
     @GetMapping("/{id}")
     public Optional<Category> getCategoryById(@PathVariable Long id){
         return categoryService.getCategoryById(id);
