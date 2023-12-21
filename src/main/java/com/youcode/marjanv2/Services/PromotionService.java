@@ -10,8 +10,7 @@ import com.youcode.marjanv2.Repositories.PromotionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,14 +33,15 @@ public class PromotionService {
         this.modelMapper = modelMapper;
     }
 
-    public List<PromotionDto> getPromotions(int page, int pageSize) {
+    public Page<PromotionDto> getPromotions(int page, int pageSize) {
         PageRequest pageRequest = PageRequest.of(page, pageSize);
-        Slice<Promotion> promotionSlice = promotionRepository.findAll(pageRequest);
+        Page<Promotion> promotionSlice = promotionRepository.findAll(pageRequest);
 
-        List<PromotionDto> promotionDtos = promotionSlice.getContent().stream()
+        List<PromotionDto> promotionDtoList = promotionSlice.getContent().stream()
                 .map(promotion -> modelMapper.map(promotion, PromotionDto.class))
                 .collect(Collectors.toList());
-        return promotionDtos;
+
+        return new PageImpl<>(promotionDtoList, pageRequest, promotionSlice.getTotalElements());
     }
 
     public PromotionDto getPromotionById(Long id) {

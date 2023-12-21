@@ -3,10 +3,9 @@ package com.youcode.marjanv2.Controllers;
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
 import com.youcode.marjanv2.Services.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @Controller
@@ -21,9 +20,9 @@ public class PromotionController {
     }
 
     @GetMapping
-    public List<PromotionDto> getPromotions(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10000") int size){
+    public Page<PromotionDto> getPromotions(
+            @RequestParam int page,
+            @RequestParam int size){
         return promotionService.getPromotions(page, size);
     }
 

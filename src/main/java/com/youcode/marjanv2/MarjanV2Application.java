@@ -9,5 +9,4 @@ public class MarjanV2Application {
     public static void main(String[] args) {
         SpringApplication.run(MarjanV2Application.class, args);
     }
-
 }
