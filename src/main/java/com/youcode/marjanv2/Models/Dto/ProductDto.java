@@ -18,5 +18,4 @@ public class ProductDto {
     private Long quantity;
     private boolean status;
     private CategoryDto category;
-    private Promotion promotion;
 }

@@ -36,7 +36,4 @@ public class Promotion {
     @JoinColumn(name = "general_Admin_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private GeneralAdmin generalAdmin;
-
-    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Product> products = new ArrayList<>();
 }

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResponsableCenterRepository extends JpaRepository<ResponsableCenter, Long> {
 
+    Integer countAllBy();
 }

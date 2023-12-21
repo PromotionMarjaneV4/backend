@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 @RestController
 @Controller
 @CrossOrigin("*")
@@ -38,5 +41,10 @@ public class PromotionController {
     @DeleteMapping("/{id}")
     public void deletePromotion(@PathVariable Long id){
         promotionService.deletePromotion(id);
+    }
+
+    @GetMapping("/statistic")
+    public Map<String, Integer> getPromotionStatistic(){
+        return promotionService.getStatistic();
     }
 }

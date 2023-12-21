@@ -1,21 +1,19 @@
 package com.youcode.marjanv2.Services;
 
+import com.youcode.marjanv2.Enum.Status;
 import com.youcode.marjanv2.Models.Dto.CategoryDto.CategoryPromotionDto;
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
 import com.youcode.marjanv2.Models.Entity.Category;
 import com.youcode.marjanv2.Models.Entity.Promotion;
 import com.youcode.marjanv2.Observer.Observer;
-import com.youcode.marjanv2.Repositories.CategoryRepository;
-import com.youcode.marjanv2.Repositories.PromotionRepository;
+import com.youcode.marjanv2.Repositories.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,14 +21,20 @@ public class PromotionService {
     private List<Observer> observers = new ArrayList<>();
     private final PromotionRepository promotionRepository;
     private final CategoryRepository categoryRepository;
-    private final CategoryService categoryService;
+    private final AdminRepository adminRepository;
+    private final ResponsableCenterRepository responsableCenterRepository;
     private final ModelMapper modelMapper;
+    private final ProductRepository productRepository;
+
     @Autowired
-    public PromotionService(PromotionRepository promotionRepository, CategoryRepository categoryRepository, CategoryService categoryService, ModelMapper modelMapper) {
+    public PromotionService(PromotionRepository promotionRepository, CategoryRepository categoryRepository, CategoryService categoryService, AdminRepository adminRepository, ResponsableCenterService responsableCenterService, ResponsableCenterRepository responsableCenterRepository, ModelMapper modelMapper,
+                            ProductRepository productRepository) {
         this.promotionRepository = promotionRepository;
         this.categoryRepository = categoryRepository;
-        this.categoryService = categoryService;
+        this.adminRepository = adminRepository;
+        this.responsableCenterRepository = responsableCenterRepository;
         this.modelMapper = modelMapper;
+        this.productRepository = productRepository;
     }
 
     public Page<PromotionDto> getPromotions(int page, int pageSize) {
@@ -78,5 +82,16 @@ public class PromotionService {
 
     public void deletePromotion(Long id) {
         promotionRepository.deleteById(id);
+    }
+
+    public Map<String, Integer> getStatistic() {
+        Map<String, Integer> statistic = new HashMap<>();
+        statistic.put("total_promotions", promotionRepository.countAllBy());
+        statistic.put("refused", promotionRepository.countAllByStatus(Status.REFUSED));
+        statistic.put("accepted", promotionRepository.countAllByStatus(Status.ACCEPTED));
+        statistic.put("total_admin_center", adminRepository.countAllBy());
+        statistic.put("total_responsable_rayon", responsableCenterRepository.countAllBy());
+        statistic.put("total_products",productRepository.countAllBy());
+        return statistic;
     }
 }

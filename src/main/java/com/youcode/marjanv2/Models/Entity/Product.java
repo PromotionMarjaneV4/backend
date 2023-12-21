@@ -25,13 +25,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonIgnore
     private Category category;
-
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "promotion_id")
-    private Promotion promotion;
 
     public boolean getStatus() {
         return this.status;

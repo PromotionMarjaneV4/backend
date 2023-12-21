@@ -32,6 +32,7 @@ public class ProductService {
     }
 
     public ProductDto createProduct(ProductDto productDto) {
+        Long id = productDto.getCategory().getId();
         Product product = modelMapper.map(productDto, Product.class);
         productRepository.save(product);
         return modelMapper.map(product, ProductDto.class);
@@ -45,9 +46,6 @@ public class ProductService {
     public Product updateProduct(Long productId, Product product) {
         Product existingProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found"));
-        if (product.getName() != null) {
-            existingProduct.setName(product.getName());
-        }
         existingProduct.setStatus(product.getStatus());
         return productRepository.save(existingProduct);
 
