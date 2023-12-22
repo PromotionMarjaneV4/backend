@@ -1,12 +1,8 @@
 package com.youcode.marjanv2.Models.Dto.CategoryDto;
 
-import com.youcode.marjanv2.Models.Dto.ProductDto;
-import com.youcode.marjanv2.Models.Dto.ProductResponseDto;
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionResponseDto;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -18,5 +14,4 @@ public class CategoryDto {
     private String name;
     private String description;
     private PromotionResponseDto promotion;
-    private List<ProductResponseDto> product;
 }

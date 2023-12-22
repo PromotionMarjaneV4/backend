@@ -1,9 +1,7 @@
 package com.youcode.marjanv2.Controllers;
 
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
-import com.youcode.marjanv2.Models.Entity.Statitistiques;
 import com.youcode.marjanv2.Services.PromotionService;
-import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -46,7 +44,7 @@ public class PromotionController {
     }
 
     @GetMapping("/statistic")
-    public Statitistiques getPromotionStatistic(){
+    public Map<String, Integer> getPromotionStatistic(){
         return promotionService.getStatistic();
     }
 }
