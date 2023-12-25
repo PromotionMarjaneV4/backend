@@ -1,4 +1,11 @@
 # Project: marjan
+
+## Variable Environment
+
+|Param|value|
+|---|---|
+|url|http://localhost:8080/api/v1/|
+
 # 📁 Collection: CrudAdmin 
 
 
@@ -179,7 +186,7 @@
 ## End-point: update status
 ### Method: PUT
 >```
->http://localhost:8080/api/v1/promotions/update
+>{{url}}promotions/update
 >```
 ### Body (**raw**)
 
