@@ -1,6 +1,7 @@
 package com.youcode.marjanv2.Controllers;
 
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
+import com.youcode.marjanv2.Models.Entity.Product;
 import com.youcode.marjanv2.Models.Entity.Statitistiques;
 import com.youcode.marjanv2.Services.PromotionService;
 import org.hibernate.stat.Statistics;
@@ -48,5 +49,9 @@ public class PromotionController {
     @GetMapping("/statistic")
     public Statitistiques getPromotionStatistic(){
         return promotionService.getStatistic();
+    }
+    @PatchMapping("/update/{promotionId}")
+    public PromotionDto updatePromotion(@PathVariable Long promotionId, @RequestBody PromotionDto promotionDto) {
+        return promotionService.updatePromotion(promotionId, promotionDto);
     }
 }

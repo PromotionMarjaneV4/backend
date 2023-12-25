@@ -4,6 +4,7 @@ import com.youcode.marjanv2.Enum.Status;
 import com.youcode.marjanv2.Models.Dto.CategoryDto.CategoryPromotionDto;
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
 import com.youcode.marjanv2.Models.Entity.Category;
+import com.youcode.marjanv2.Models.Entity.Product;
 import com.youcode.marjanv2.Models.Entity.Promotion;
 import com.youcode.marjanv2.Models.Entity.Statitistiques;
 import com.youcode.marjanv2.Observer.Observer;
@@ -93,5 +94,14 @@ public class PromotionService {
         statitistiques.setTotalAdminCenter(adminRepository.countAllBy());
         statitistiques.setTotalProducts(productRepository.countAllBy());
         return statitistiques;
+    }
+
+    public PromotionDto updatePromotion(Long promotionId, PromotionDto promotionDto) {
+        Promotion existingPromotion = promotionRepository.findById(promotionId)
+                .orElseThrow(() -> new EntityNotFoundException("Promotion not found"));
+
+        existingPromotion.setStatus(promotionDto.getStatus());
+
+        return modelMapper.map(promotionRepository.save(existingPromotion), PromotionDto.class);
     }
 }
