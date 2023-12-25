@@ -47,4 +47,8 @@ public class PromotionController {
     public Map<String, Integer> getPromotionStatistic(){
         return promotionService.getStatistic();
     }
+    @PutMapping("/update")
+    public PromotionDto updatePromotion(@RequestBody PromotionDto promotionDto) {
+        return promotionService.updatePromotion(promotionDto);
+    }
 }

@@ -94,4 +94,11 @@ public class PromotionService {
         statistic.put("total_products",productRepository.countAllBy());
         return statistic;
     }
+    public PromotionDto updatePromotion(PromotionDto promotionDto) {
+        Promotion existingPromotion = promotionRepository.findById(promotionDto.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Promotion not found"));
+        existingPromotion.setId(promotionDto.getId());
+        existingPromotion.setStatus(promotionDto.getStatus());
+        return modelMapper.map(promotionRepository.save(existingPromotion), PromotionDto.class);
+    }
 }
