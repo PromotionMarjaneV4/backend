@@ -6,11 +6,9 @@ import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
 import com.youcode.marjanv2.Models.Entity.Category;
 import com.youcode.marjanv2.Models.Entity.Product;
 import com.youcode.marjanv2.Models.Entity.Promotion;
-import com.youcode.marjanv2.Models.Entity.Statitistiques;
 import com.youcode.marjanv2.Observer.Observer;
 import com.youcode.marjanv2.Repositories.*;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.stat.Statistics;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -81,19 +79,21 @@ public class PromotionService {
         return modelMapper.map(savedPromotion, PromotionDto.class);
     }
 
+
+
     public void deletePromotion(Long id) {
         promotionRepository.deleteById(id);
     }
 
-    public Statitistiques getStatistic() {
-        Statitistiques statitistiques = new Statitistiques();
-        statitistiques.setTotalPromotions(promotionRepository.countAllBy());
-        statitistiques.setAccepted(promotionRepository.countAllByStatus(Status.ACCEPTED));
-        statitistiques.setRefused(promotionRepository.countAllByStatus(Status.REFUSED));
-        statitistiques.setTotalResponsableRayon(responsableCenterRepository.countAllBy());
-        statitistiques.setTotalAdminCenter(adminRepository.countAllBy());
-        statitistiques.setTotalProducts(productRepository.countAllBy());
-        return statitistiques;
+    public Map<String, Integer> getStatistic() {
+        Map<String, Integer> statistic = new HashMap<>();
+        statistic.put("total_promotions", promotionRepository.countAllBy());
+        statistic.put("refused", promotionRepository.countAllByStatus(Status.REFUSED));
+        statistic.put("accepted", promotionRepository.countAllByStatus(Status.ACCEPTED));
+        statistic.put("total_admin_center", adminRepository.countAllBy());
+        statistic.put("total_responsable_rayon", responsableCenterRepository.countAllBy());
+        statistic.put("total_products",productRepository.countAllBy());
+        return statistic;
     }
 
     public PromotionDto updatePromotion(Long promotionId, PromotionDto promotionDto) {
