@@ -32,12 +32,10 @@ public class ProductService {
     }
 
     public ProductDto createProduct(ProductDto productDto) {
-        Long id = productDto.getCategory().getId();
         Product product = modelMapper.map(productDto, Product.class);
         productRepository.save(product);
         return modelMapper.map(product, ProductDto.class);
     }
-
 
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);

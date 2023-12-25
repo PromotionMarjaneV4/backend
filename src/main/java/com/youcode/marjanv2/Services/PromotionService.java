@@ -4,6 +4,7 @@ import com.youcode.marjanv2.Enum.Status;
 import com.youcode.marjanv2.Models.Dto.CategoryDto.CategoryPromotionDto;
 import com.youcode.marjanv2.Models.Dto.PromotionDto.PromotionDto;
 import com.youcode.marjanv2.Models.Entity.Category;
+import com.youcode.marjanv2.Models.Entity.Product;
 import com.youcode.marjanv2.Models.Entity.Promotion;
 import com.youcode.marjanv2.Observer.Observer;
 import com.youcode.marjanv2.Repositories.*;
